@@ -4,7 +4,7 @@ $primary-light: #9feadc;
 $primary-dark: #238270;
 $fc-light: #6d66b9;
 // font
-$timer: 40rem;
+$timer: 35rem;
 
 
 //------------ Main Styles
@@ -51,6 +51,7 @@ body, {
 
     div{
       margin: 50px 0;
+      cursor: pointer;
     }
   }
 

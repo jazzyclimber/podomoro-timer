@@ -34,7 +34,8 @@ body {
     align-items: center;
     height: 100%; }
     #nav-bar .buttons div {
-      margin: 50px 0; }
+      margin: 50px 0;
+      cursor: pointer; }
 
 #timer-container {
   display: flex;
@@ -43,6 +44,6 @@ body {
   height: 100vh; }
   #timer-container #time {
     color: #6d66b9;
-    font-size: 40rem; }
+    font-size: 35rem; }
 
 /*# sourceMappingURL=style.css.map */
