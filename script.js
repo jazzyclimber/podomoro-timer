@@ -1,10 +1,11 @@
 // ------------ Global Variables ----------------
-var startButton = document.querySelector("#play"),
+let startButton = document.querySelector("#play"),
   pauseButton = document.querySelector("#pause"),
   display = document.querySelector("#time"),
   isPaused = false,
   timer = 60*25,
-  min, sec;
+  interval = undefined
+  , min, sec;
 
 // ------------ Main Functions -------------------
 
@@ -12,11 +13,13 @@ var startButton = document.querySelector("#play"),
 function countDown() {
   isPaused = false;
 
-  setInterval(function () {
-    if (!isPaused){
-      setFormatTime(--timer)
-    }
-  }, 1000);
+  if(!interval) {
+    interval = setInterval(function () {
+      if (!isPaused){
+        setFormatTime(--timer)
+      }
+    }, 1000);
+  }
 }
 
 // Format and display the appropriate time.
