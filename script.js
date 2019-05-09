@@ -1,22 +1,20 @@
 // ------------ Global Variables ----------------
-var startButton = document.querySelector("#play"),
+let startButton = document.querySelector("#play"),
   pauseButton = document.querySelector("#pause"),
   display = document.querySelector("#time"),
-  isPaused = false,
   timer = 60*25,
+  interval = null,
   min, sec;
 
 // ------------ Main Functions -------------------
 
 // Counts Down Whatever Time is in Timer
 function countDown() {
-  isPaused = false;
-
-  setInterval(function () {
-    if (!isPaused){
-      setFormatTime(--timer)
-    }
-  }, 1000);
+  if(!interval) {
+    interval = setInterval(function () {
+      setFormatTime(--timer);
+    }, 1000);
+  }
 }
 
 // Format and display the appropriate time.
@@ -30,18 +28,14 @@ function setFormatTime(duration) {
   display.textContent = min + ":" + sec;
 }
 
+//Clears the interval set in countDown
 function setPause() {
-  isPaused = true;
+  if (interval) {
+    interval = clearInterval(interval);
+  }
 }
 
-// Functions to call
+//---------- Functions to call ------------------
 setFormatTime(timer);
-startButton.addEventListener('click', countDown,);
+startButton.addEventListener('click', countDown);
 pauseButton.addEventListener('click', setPause);
-
-
-/* Timer is working. Play and Pause button both work fine.
-Issue: when restarting a paued timer - the timer is out of sync.
-it is either trying to run multiple iterations of itself,
-or it is speeding up it's interval.  
-*/
