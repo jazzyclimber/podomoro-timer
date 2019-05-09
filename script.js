@@ -39,3 +39,5 @@ function setPause() {
 setFormatTime(timer);
 startButton.addEventListener('click', countDown);
 pauseButton.addEventListener('click', setPause);
+
+//Test to see where this sits in insights
