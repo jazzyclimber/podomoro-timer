@@ -1,6 +1,7 @@
 // ------------ Global Variables ----------------
 let startButton = document.querySelector("#play"),
   pauseButton = document.querySelector("#pause"),
+  resetButton = document.querySelector("#repeat"),
   display = document.querySelector("#time"),
   timer = 60*25,
   interval = null,
@@ -28,16 +29,24 @@ function setFormatTime(duration) {
   display.textContent = min + ":" + sec;
 }
 
-//Clears the interval set in countDown
+// Clears the interval set in countDown
 function setPause() {
   if (interval) {
     interval = clearInterval(interval);
   }
 }
 
+// Resets interval
+function resetTimer() {
+  if (interval) {
+    setPause();
+  }
+  timer = 60 * 25;
+  setFormatTime(timer);
+}
+
 //---------- Functions to call ------------------
 setFormatTime(timer);
 startButton.addEventListener('click', countDown);
 pauseButton.addEventListener('click', setPause);
-
-//Test to see where this sits in insights
+resetButton.addEventListener('click', resetTimer);
