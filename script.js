@@ -11,11 +11,11 @@ let startButton = document.querySelector("#play"),
 
 // Counts Down Whatever Time is in Timer
 function countDown() {
-  if(!interval) {
-    interval = setInterval(function () {
-      setFormatTime(--timer);
-    }, 1000);
-  }
+  startInterval = setInterval(function () {
+    setFormatTime(--timer);
+  }, 1000);
+
+  !interval ? interval = startInterval : interval = interval;
 }
 
 // Format and display the appropriate time.
@@ -31,17 +31,14 @@ function setFormatTime(duration) {
 
 // Clears the interval set in countDown
 function setPause() {
-  if (interval) {
-    interval = clearInterval(interval);
-  }
+  interval ? interval = clearInterval(interval) : null;
 }
 
 // Resets interval
 function resetTimer() {
-  if (interval) {
-    setPause();
-  }
   timer = 60 * 25;
+
+  interval ? setPause() : null ;
   setFormatTime(timer);
 }
 
