@@ -3,8 +3,10 @@
 $primary-light: #9feadc;
 $primary-dark: #238270;
 $fc-light: #6d66b9;
+$fc-passive: rgba(109, 102, 185, .40);
 // font
-$timer: 35rem;
+$timer-active: 35rem;
+$timer-passive: 10rem;
 
 
 //------------ Main Styles
@@ -19,15 +21,16 @@ body, {
   width: 100%;
   height: 100%;
   background: $primary-light;
-
-  .page-wrapper {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1150px;
-    height: auto;
-  }
+}
+.page-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1150px;
+  height: auto;
 }
 
+
+// Icon Bar
 #nav-bar{
   position: fixed;
   right: 0;
@@ -57,14 +60,29 @@ body, {
 
 
 }
-#timer-container{
+
+//Timer Styles
+.timer-wrapper {
   display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100vh;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 
-  #time {
+  .active {
     color: $fc-light;
-    font-size: $timer
+    font-size: $timer-active;
   }
+  .passive {
+    font-size: $timer-passive;
+    color: $fc-passive;
+  }
+}
+#work-container{
+  #work-time {
+  }
+}
+#rest-container {
+  #rest-time {}
 }

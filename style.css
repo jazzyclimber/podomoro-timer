@@ -1,5 +1,6 @@
 *, *::before, *::after {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -8,13 +9,15 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  background: #9feadc; }
-  html .page-wrapper,
-  body .page-wrapper {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1150px;
-    height: auto; }
+  background: #9feadc;
+}
+
+.page-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1150px;
+  height: auto;
+}
 
 #nav-bar {
   position: fixed;
@@ -22,28 +25,40 @@ body {
   top: 0;
   bottom: 0;
   width: 200px;
-  background: #9feadc; }
-  #nav-bar svg {
-    height: 5rem;
-    width: 5rem;
-    color: #238270; }
-  #nav-bar .buttons {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: 100%; }
-    #nav-bar .buttons div {
-      margin: 50px 0;
-      cursor: pointer; }
-
-#timer-container {
+  background: #9feadc;
+}
+#nav-bar svg {
+  height: 5rem;
+  width: 5rem;
+  color: #238270;
+}
+#nav-bar .buttons {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh; }
-  #timer-container #time {
-    color: #6d66b9;
-    font-size: 35rem; }
+  height: 100%;
+}
+#nav-bar .buttons div {
+  margin: 50px 0;
+  cursor: pointer;
+}
+
+.timer-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.timer-wrapper .active {
+  color: #6d66b9;
+  font-size: 35rem;
+}
+.timer-wrapper .passive {
+  font-size: 10rem;
+  color: rgba(109, 102, 185, 0.4);
+}
 
 /*# sourceMappingURL=style.css.map */
