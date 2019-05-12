@@ -4,20 +4,32 @@ let startButton = document.querySelector("#play"),
   resetButton = document.querySelector("#repeat"),
   work_display = document.querySelector("#work-time"),
   rest_display = document.querySelector("#rest-time"),
-  timer = 60*25,
-  rest_timer = 60*5,
+  timer = 60 * 25,
+  rest_timer = 5 * 1,
   interval = null,
   min, sec;
+
+// Guard Variables
+let workPeriod = work_display.classList.contains("active") ? true : false;
 
 // ------------ Main Functions -------------------
 
 // Counts Down Whatever Time is in Timer
 function countDown() {
-  startInterval = setInterval(function () {
-    setFormatTime(--timer, work_display);
-  }, 1000);
+  if (!interval && workPeriod == true ) {
+    startWork = setInterval(function () {
+      setFormatTime(--timer, work_display);
+    }, 1000);
 
-  !interval ? interval = startInterval : interval = interval;
+    interval = startWork;
+
+  } else if (!interval && workPeriod == false) {
+    startRest = setInterval(function () {
+      setFormatTime(--rest_timer, rest_display);
+    }, 1000);
+
+    interval = startRest;
+  }
 }
 
 // Format and display the appropriate time.
@@ -38,9 +50,11 @@ function setPause() {
 // Resets interval
 function resetTimer() {
   timer = 60 * 25;
+  rest_timer = 60 * 5;
 
   interval ? setPause() : null ;
   setFormatTime(timer, work_display);
+  setFormatTime(rest_timer, rest_display)
 }
 
 //---------- Functions to call ------------------
