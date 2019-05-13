@@ -7,8 +7,8 @@ let startButton = document.querySelector("#play"),
   pauseButton = document.querySelector("#pause"),
   resetButton = document.querySelector("#repeat"),
   displays = [document.querySelector("#work-time"), document.querySelector("#rest-time")],
-  work_time = 60 * 25,
-  rest_time = 60 * 5,
+  work_time = 1 * 7,
+  rest_time = 1 * 5,
   times = [work_time, rest_time],
   interval = null,
   min, sec;
@@ -17,7 +17,6 @@ let startButton = document.querySelector("#play"),
 let actual_period = displays[WORK_PERIOD].classList.contains("active") ? WORK_PERIOD : REST_PERIOD;
 
 // ------------ Main Functions -------------------
-
 // Checks if actual period has ended
 function isOver(actual_time) {
   return actual_time === 0;
@@ -37,17 +36,19 @@ function changeDisplays() {
 
 // Counts Down Whatever Time is in Timer
 function countDown() {
-  if(!interval) {
-    interval = setInterval(function() {
-      setFormatTime(--times[actual_period], displays[actual_period]);
-      if (isOver(times[actual_period])) {
-        setPause();
-        resetTimer();
-        changeDisplays();
-        countDown();
-      }
-    }, 1000);
-  }
+  setPause();
+
+  interval = setInterval(function() {
+    setFormatTime(--times[actual_period], displays[actual_period]);
+
+    if (isOver(times[actual_period])) {
+      setPause();
+      resetTimer();
+      changeDisplays();
+      countDown();
+    }
+
+  }, 1000);
 }
 
 // Format and display the appropriate time.
