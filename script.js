@@ -2,16 +2,23 @@
 const WORK_PERIOD = 0,
       REST_PERIOD = 1;
 
-// ------------ Global Variables ----------------
+// ------------ Global slectors ----------------
 let startButton = document.querySelector("#play"),
   pauseButton = document.querySelector("#pause"),
   resetButton = document.querySelector("#repeat"),
-  displays = [document.querySelector("#work-time"), document.querySelector("#rest-time")],
-  work_time = 1 * 7,
-  rest_time = 1 * 5,
-  times = [work_time, rest_time],
-  interval = null,
-  min, sec;
+  settingsButton = document.querySelector("#settings"),
+  closeSettings = document.querySelector(".close"),
+  settingsDisplay = document.querySelector('#settings-display'),
+  workAmount = document.querySelector(".work.display"),
+  restAmount = document.querySelector('.rest.display'),
+  displays = [document.querySelector("#work-time"), document.querySelector("#rest-time")];
+
+//------------ Global Variables ---------------
+  let work_time = 1 * 7,
+    rest_time = 1 * 5,
+    times = [work_time, rest_time],
+    interval = null,
+    min, sec;
 
 // Guard Variables
 let actual_period = displays[WORK_PERIOD].classList.contains("active") ? WORK_PERIOD : REST_PERIOD;
@@ -76,8 +83,23 @@ function resetTimer() {
   }
 }
 
+// Open/close settings display
+function openSettings() {
+  settingsDisplay.style.height = "100%";
+}
+function closeSettingsDisplay() {
+  settingsDisplay.style.height = "0";
+}
+
+// Display setting times
+setFormatTime(work_time, workAmount);
+setFormatTime(rest_time, restAmount);
+
+
 //---------- Functions to call ------------------
 resetTimer();
 startButton.addEventListener('click', countDown);
 pauseButton.addEventListener('click', setPause);
 resetButton.addEventListener('click', resetTimer);
+settingsButton.addEventListener('click', openSettings);
+closeSettings.addEventListener('click', closeSettingsDisplay);
