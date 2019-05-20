@@ -4,9 +4,12 @@ $primary-light: #9feadc;
 $primary-dark: #238270;
 $fc-light: #6d66b9;
 $fc-passive: rgba(109, 102, 185, .40);
+$settings-bg: rgba(109, 102, 185, .98);
 // font
 $timer-active: 35rem;
 $timer-passive: 10rem;
+$setting-heading: 5rem;
+$settings-display:  3rem;
 
 
 //------------ Main Styles
@@ -58,8 +61,101 @@ body, {
     }
   }
 
-
 }
+
+//Settings displays
+#settings-display {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  background-color: $settings-bg;
+  transition: all .7s;
+  z-index: 10;
+
+  .close {
+    position: absolute;
+    width: 60px;
+    top: 0;
+    right: 0;
+    height: 45px;
+    margin: 60px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    cursor: pointer;
+
+    .bar {
+      display: block;
+      position: absolute;
+      height: 7px;
+      width: 100%;
+      border-radius: 9px;
+      opacity: 1;
+      left: 0;
+      background-color: $primary-light;
+    }
+    #top {
+      top: 18px;
+      -webkit-transform: rotate(135deg);
+      -moz-transform: rotate(135deg);
+      -o-transform: rotate(135deg);
+      transform: rotate(135deg);
+
+    }
+      #bottom {
+        top: 18px;
+        -webkit-transform: rotate(-135deg);
+        -moz-transform: rotate(-135deg);
+        -o-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+
+    }
+  }
+}
+
+#work-settings, #rest-settings {
+  .display-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+
+    .add-time {
+    font-size: $settings-display;
+    color: $primary-light;
+    cursor: pointer;
+  }
+    .display {
+    background-color: $primary-light;
+    font-size: $settings-display;
+    color: $fc-light;
+    margin: 0 30px;
+    padding: 10px 20px;
+    border-radius: 4px;
+  }
+    .sub-time {
+    font-size: $settings-display;
+    color: $primary-light;
+    cursor: pointer;
+  }
+  }
+}
+#work-settings_heading, #rest-settings_heading {
+  color: $primary-light;
+  font-size: $setting-heading;
+}
+
+
 
 //Timer Styles
 .timer-wrapper {
