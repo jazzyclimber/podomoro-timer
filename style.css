@@ -44,6 +44,91 @@ body {
   cursor: pointer;
 }
 
+#settings-display {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  background-color: rgba(109, 102, 185, 0.98);
+  transition: all 0.7s;
+  z-index: 10;
+}
+#settings-display .close {
+  position: absolute;
+  width: 60px;
+  top: 0;
+  right: 0;
+  height: 45px;
+  margin: 60px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  cursor: pointer;
+}
+#settings-display .close .bar {
+  display: block;
+  position: absolute;
+  height: 7px;
+  width: 100%;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  background-color: #9feadc;
+}
+#settings-display .close #top {
+  top: 18px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+#settings-display .close #bottom {
+  top: 18px;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+#work-settings .display-container, #rest-settings .display-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#work-settings .display-container .add-time, #rest-settings .display-container .add-time {
+  font-size: 3rem;
+  color: #9feadc;
+  cursor: pointer;
+}
+#work-settings .display-container .display, #rest-settings .display-container .display {
+  background-color: #9feadc;
+  font-size: 3rem;
+  color: #6d66b9;
+  margin: 0 30px;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+#work-settings .display-container .sub-time, #rest-settings .display-container .sub-time {
+  font-size: 3rem;
+  color: #9feadc;
+  cursor: pointer;
+}
+
+#work-settings_heading, #rest-settings_heading {
+  color: #9feadc;
+  font-size: 5rem;
+}
+
 .timer-wrapper {
   display: flex;
   flex-direction: column;
