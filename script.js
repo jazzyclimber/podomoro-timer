@@ -2,21 +2,23 @@
 const WORK_PERIOD = 0,
       REST_PERIOD = 1;
 
-// ------------ Global slectors ----------------
+// ------------ Global selectors ----------------
 let startButton = document.querySelector("#play"),
   pauseButton = document.querySelector("#pause"),
   resetButton = document.querySelector("#repeat"),
   settingsButton = document.querySelector("#settings"),
   closeSettings = document.querySelector(".close"),
   settingsDisplay = document.querySelector('#settings-display'),
-  workAmount = document.querySelector(".work.display"),
-  restAmount = document.querySelector('.rest.display'),
-  displays = [document.querySelector("#work-time"), document.querySelector("#rest-time")];
+  settingsTimers = [document.querySelector(".work.display"), document.querySelector('.rest.display')],
+  displays = [document.querySelector("#work-time"), document.querySelector("#rest-time")],
+  addButtons = document.querySelectorAll('.add-time'),
+  subButtons = document.querySelectorAll('.sub-time');
 
 //------------ Global Variables ---------------
   let work_time = 1 * 7,
     rest_time = 1 * 5,
     times = [work_time, rest_time],
+    settings_times = [work_time, rest_time],
     interval = null,
     min, sec;
 
@@ -26,7 +28,7 @@ let actual_period = displays[WORK_PERIOD].classList.contains("active") ? WORK_PE
 // ------------ Main Functions -------------------
 // Checks if actual period has ended
 function isOver(actual_time) {
-  return actual_time === 0;
+  return actual_time <= 0;
 }
 
 // Change displays
@@ -75,26 +77,56 @@ function setPause() {
 
 // Resets interval
 function resetTimer() {
-  times[WORK_PERIOD] = work_time;
-  times[REST_PERIOD] = rest_time;
-  interval ? setPause() : null ;
+  times[WORK_PERIOD] = settings_times[WORK_PERIOD] = work_time;
+  times[REST_PERIOD] = settings_times[REST_PERIOD] = rest_time;
+  updateTimers();
+}
+
+// Sometimes we don't want to reset it, but we want to update it.
+function updateTimers() {
+  setPause();
   for(let i = 0; i < displays.length; i++) {
     setFormatTime(times[i], displays[i]);
+    setFormatTime(settings_times[i], settingsTimers[i]);
   }
 }
 
 // Open/close settings display
 function openSettings() {
+  setPause();
   settingsDisplay.style.height = "100%";
 }
+
 function closeSettingsDisplay() {
+  for(let i = 0; i < displays.length; i++) {
+    times[i] = settings_times[i];
+  }
+  updateTimers();
   settingsDisplay.style.height = "0";
 }
 
-// Display setting times
-setFormatTime(work_time, workAmount);
-setFormatTime(rest_time, restAmount);
+function add(period) {
+  settings_times[period] += 1;
+}
 
+function sub(period) {
+  settings_times[period] = Math.max(settings_times[period] - 1, 0);
+}
+
+// Receives an array of buttons and a mathOperation function
+function setButtonsEvent(buttons, mathOperation) {
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      period = button.classList[0] == 'work' ? WORK_PERIOD : REST_PERIOD;
+      mathOperation(period);
+      setFormatTime(settings_times[period], settingsTimers[period]);
+    });
+  });
+}
+
+// Display setting times
+setFormatTime(work_time, settingsTimers[WORK_PERIOD]);
+setFormatTime(rest_time, settingsTimers[REST_PERIOD]);
 
 //---------- Functions to call ------------------
 resetTimer();
@@ -103,3 +135,5 @@ pauseButton.addEventListener('click', setPause);
 resetButton.addEventListener('click', resetTimer);
 settingsButton.addEventListener('click', openSettings);
 closeSettings.addEventListener('click', closeSettingsDisplay);
+setButtonsEvent(addButtons, add);
+setButtonsEvent(subButtons, sub);
