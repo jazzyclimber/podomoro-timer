@@ -52,7 +52,7 @@ function countDown() {
 
     if (isOver(times[actual_period])) {
       setPause();
-      resetTimer();
+      updateTimers();
       changeDisplays();
       countDown();
     }
@@ -67,7 +67,14 @@ function setFormatTime(duration, display) {
 
   sec = sec < 10 ? "0" + sec : sec;
 
-  display.textContent = min + ":" + sec;
+  let formattedTime = min + ":" + sec;
+
+  // Settings displays. Probably there is a better way.
+  if(display.classList[1] == 'display') {
+    formattedTime = min
+  }
+
+  display.textContent = formattedTime;
 }
 
 // Clears the interval set in countDown
@@ -86,6 +93,7 @@ function resetTimer() {
 function updateTimers() {
   setPause();
   for(let i = 0; i < displays.length; i++) {
+    times[i] = settings_times[i];
     setFormatTime(times[i], displays[i]);
     setFormatTime(settings_times[i], settingsTimers[i]);
   }
@@ -106,11 +114,11 @@ function closeSettingsDisplay() {
 }
 
 function add(period) {
-  settings_times[period] += 1;
+  settings_times[period] += 60;
 }
 
 function sub(period) {
-  settings_times[period] = Math.max(settings_times[period] - 1, 0);
+  settings_times[period] = Math.max(settings_times[period] - 60, 60);
 }
 
 // Receives an array of buttons and a mathOperation function
