@@ -30,6 +30,7 @@ let actual_period = displays[WORK_PERIOD].classList.contains("active") ? WORK_PE
 function isOver(actual_time) {
   return actual_time <= 0;
 }
+ 
 
 // Change displays
 function changeDisplays() {
