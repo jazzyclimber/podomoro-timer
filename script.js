@@ -52,7 +52,8 @@ function countDown() {
 
     if (isOver(times[actual_period])) {
       setPause();
-      resetTimer();
+      updateTimers();
+      // resetTimer();
       changeDisplays();
       countDown();
     }
