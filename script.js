@@ -29,6 +29,13 @@ function setPause() {
   session ? session = clearInterval(session) : session = null;
 }
 
+function formatSettingTime(time, display) {
+  min = Math.floor(time / 60);
+
+
+  display.textContent = min;
+}
+
 function formatTime(time, display) {
   min = Math.floor(time / 60);
   sec = Math.floor(time % 60);
@@ -39,25 +46,33 @@ function formatTime(time, display) {
 }
 
 function addWork() {
+  // workTime = workTime + 60;
   ++workTime;
   times[WORK] =  workTime;
-  formatTime(workTime, settingsTimers[WORK])
+  // formatSettingTime(workTime, settingsTimers[WORK]);
+  formatTime(workTime, settingsTimers[WORK]);
 }
 
 function subWork() {
+  // workTime = workTime - 60;
   --workTime;
   times[WORK] = workTime;
-  formatTime(workTime, settingsTimers[WORK])
+  // formatSettingTime(workTime, settingsTimers[WORK]);
+  formatTime(workTime, settingsTimers[WORK]);
 }
 
 function addRest() {
+  // restTime = restTime + 60;
   ++restTime;
   times[REST] = restTime;
-  formatTime(restTime, settingsTimers[REST])
+  // formatSettingTime(restTime, settingsTimers[REST]);
+  formatTime(restTime, settingsTimers[REST]);
 }
 function subRest() {
+  // restTime = restTime - 60;
   --restTime;
   times[REST] = workTime;
+  // formatSettingTime(restTime, settingsTimers[REST]);
   formatTime(restTime, settingsTimers[REST])
 }
 
@@ -83,6 +98,15 @@ function switchActiveTimer() {
     displays[i].classList.toggle('active');
     displays[i].classList.toggle('passive');
   }
+
+  isWork === true ? setPrimaryBg() : setSecondaryBg();
+}
+
+function setPrimaryBg() {
+  document.querySelector('body').style.background = "#9feadc";
+}
+function setSecondaryBg() {
+  document.querySelector('body').style.background = "#eac9fd";
 }
 
 function resetTimer() {
@@ -96,7 +120,13 @@ function openSettings() {
   setPause();
   settingsDisplay.style.height = "100%";
 }
+
 function closeSettingsDisplay() {
+  isWork === true ? null : switchActiveTimer();
+
+  times[WORK] = workTime;
+  times[REST] = restTime;
+
   formatTime(times[WORK], displays[WORK]);
   formatTime(times[REST], displays[REST]);
   settingsDisplay.style.height = "0";
@@ -113,8 +143,10 @@ function init() {
   times[REST] = restTime;
   formatTime(times[WORK], displays[WORK]);
   formatTime(times[REST], displays[REST]);
-  formatTime(workTime, settingsTimers[WORK])
-  formatTime(restTime, settingsTimers[REST])
+  // formatSettingTime(workTime, settingsTimers[WORK]);
+  // formatSettingTime(restTime, settingsTimers[REST]);
+  formatTime(workTime, settingsTimers[WORK]);
+  formatTime(restTime, settingsTimers[REST]);
 }
 
 // ------------ Call Functions ---------------
