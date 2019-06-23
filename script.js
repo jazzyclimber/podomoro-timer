@@ -1,8 +1,8 @@
 // ------------ Global Constants ----------------
 const WORK = 0,
       REST = 1,
-      defaultWorkTime = 1 * 7,
-      defaultRestTime = 1 * 5;
+      defaultWorkTime = 60 * 25,
+      defaultRestTime = 60 * 5;
 
 // ------------ Global selectors ----------------
 const startButton = document.querySelector("#play"),
@@ -46,33 +46,33 @@ function formatTime(time, display) {
 }
 
 function addWork() {
-  // workTime = workTime + 60;
-  ++workTime;
+  workTime = workTime + 60;
+  // ++workTime;
   times[WORK] =  workTime;
-  // formatSettingTime(workTime, settingsTimers[WORK]);
+  formatSettingTime(workTime, settingsTimers[WORK]);
   formatTime(workTime, settingsTimers[WORK]);
 }
 
 function subWork() {
-  // workTime = workTime - 60;
-  --workTime;
+  workTime = workTime - 60;
+  // --workTime;
   times[WORK] = workTime;
-  // formatSettingTime(workTime, settingsTimers[WORK]);
+  formatSettingTime(workTime, settingsTimers[WORK]);
   formatTime(workTime, settingsTimers[WORK]);
 }
 
 function addRest() {
-  // restTime = restTime + 60;
-  ++restTime;
+  restTime = restTime + 60;
+  // ++restTime;
   times[REST] = restTime;
-  // formatSettingTime(restTime, settingsTimers[REST]);
+  formatSettingTime(restTime, settingsTimers[REST]);
   formatTime(restTime, settingsTimers[REST]);
 }
 function subRest() {
-  // restTime = restTime - 60;
-  --restTime;
+  restTime = restTime - 60;
+  // --restTime;
   times[REST] = workTime;
-  // formatSettingTime(restTime, settingsTimers[REST]);
+  formatSettingTime(restTime, settingsTimers[REST]);
   formatTime(restTime, settingsTimers[REST])
 }
 
@@ -143,8 +143,8 @@ function init() {
   times[REST] = restTime;
   formatTime(times[WORK], displays[WORK]);
   formatTime(times[REST], displays[REST]);
-  // formatSettingTime(workTime, settingsTimers[WORK]);
-  // formatSettingTime(restTime, settingsTimers[REST]);
+  formatSettingTime(workTime, settingsTimers[WORK]);
+  formatSettingTime(restTime, settingsTimers[REST]);
   formatTime(workTime, settingsTimers[WORK]);
   formatTime(restTime, settingsTimers[REST]);
 }
